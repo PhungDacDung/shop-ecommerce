@@ -21,7 +21,7 @@ class HomeController extends Controller
     }
 
     public function index(){
-        return view('/main',[
+        return view('pages/main',[
             'title' => 'Trang chủ',
             'sliders' => $this->slider->getSlider(),
             'products' => $this->productService->get(),
@@ -55,19 +55,6 @@ class HomeController extends Controller
         return response()->json(['html' => '']);
     }
 
-
-    // public function getProductId($id){
-    //     // dd($product);
-    //     return view('/main',[
-    //         'title' => 'Trang chủ',
-    //         'sliders' => $this->slider->getSlider(),
-    //         'products' => $this->productService->get(),
-    //         'productDt' => $this->productService->getById($id),
-
-
-    //     ]);
-        
-    // }
 
     public function getProductId($id){
         

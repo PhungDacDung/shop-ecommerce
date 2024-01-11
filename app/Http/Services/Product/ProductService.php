@@ -46,7 +46,7 @@ class ProductService{
     }
 
     public function getById($id){
-        return Product::where('id','=',$id)->get();
+        return Product::where('id','=',$id)->first();
     }
 
 

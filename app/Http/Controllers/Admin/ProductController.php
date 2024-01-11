@@ -111,4 +111,11 @@ class ProductController extends Controller
             'error' => true,
         ]);
     }
+
+   
+    /* Product home page */
+    public function showDetail($id){
+        $data = $this->productService->getById($id);
+        return view("pages/product-detail",compact('data'));
+    }
 }

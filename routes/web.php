@@ -7,8 +7,10 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Services\UploadService;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use PHPUnit\Framework\Attributes\Group;
 
@@ -77,9 +79,30 @@ Route::middleware(['auth'])->group(function(){
     
     
 });
+/* View home page */
 Route::get('/',[HomeController::class,'index']);
 Route::post('/services/loadProduct',[HomeController::class,'loadMore']);
+
+/* Get product for quick view */
 Route::get('/product/{id}',[HomeController::class,'getProductId'])->name('get-product-id');
+
+Route::get('/about', function () {
+    return view('pages/about');
+})->name("about-us");
+
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+/* Product detail page */
+Route::get('/product-detail/{id}',[ProductController::class,'showDetail'])->name('product-detail');
+
+
+Route::middleware(['auth'])->group(function(){
+
+/* Add to cart */
+
+Route::post('/add-cart',[CartController::class,'create']);
+
+/* Show cart */
+Route::get('/cart',[CartController::class,'show']);
+});
